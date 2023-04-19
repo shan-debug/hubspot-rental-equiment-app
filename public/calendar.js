@@ -15,16 +15,56 @@ import './css/style.css'
  */
 async function createCalendar() {
   //TODO: Wrap everything in a try/catch for error handling.
-  
-  //TODO: Fetch the data from /get-data
+  try {
+    //TODO: Fetch the data from /get-data
+    const resp = await fetch('http://localhost:3000/get-data');
 
-  //TODO: Write an if statment to await response status code of 200 'OK'
-  
-  //TODO: Create calendar instance 
-  
-  //TODO: Add the individual events to the calendar
+    //TODO: Write an if statment to await response status code of 200 'OK'
+    if (resp.status === 200) {
+      const data = await resp.json();
+      //TODO: Create calendar instance
+      const dataMap = data.map((rental) => {
+        return {
+          id: rental.id,
+          calendarId: rental.properties.name,
+          title: rental.properties.name,
+          category: 'allday',
+          dueDateClass: '',
+          start: rental.properties.start_date,
+          end: rental.properties.end_date,
+        }
+      });
+      console.log(dataMap);
 
-  //TODO: Add heading above calendar to show month and year
+      const calendars = [];
+      dataMap.forEach(rental => {
+        const avCalendars = {
+          id: rental.calendarId,
+          name: rental.title,
+          backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+        }
+        calendars.push(avCalendars);
+      });
+      console.log(calendars);
+
+      const calendar = new Calendar('#calendar', {
+        defaultView: 'month',
+        calendars: calendars,
+      });
+
+      //TODO: Add the individual events to the calendar
+      calendar.createEvents(dataMap);
+
+      //TODO: Add heading above calendar to show month and year
+      const month = calendar.getDate();
+      document.getElementById('month-heading').innerHTML = `${new Date(month).toLocaleString('en-us', { month: 'long', year: 'numeric' })}`;
+    } else {
+      throw new Error(`Something wen wrong ${resp.statusText}`);
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //* Always call your function.

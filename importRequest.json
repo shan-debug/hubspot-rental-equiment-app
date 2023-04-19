@@ -9,19 +9,19 @@
                 "hasHeader": true,
                 "columnMappings": [
                     {
-                        "columnObjectTypeId": "YOUR_CUSTOM_OBJECT_ID",
+                        "columnObjectTypeId": "2-13876839",
                         "columnName": "Name",
                         "propertyName": "name",
                         "idColumnType": null
                     },
                     {
-                        "columnObjectTypeId": "YOUR_CUSTOM_OBJECT_ID",
+                        "columnObjectTypeId": "2-13876839",
                         "columnName": "Start date",
                         "propertyName": "start_date",
                         "idColumnType": null
                     },
                     {
-                        "columnObjectTypeId": "YOUR_CUSTOM_OBJECT_ID",
+                        "columnObjectTypeId": "2-13876839",
                         "columnName": "End date",
                         "propertyName": "end_date",
                         "idColumnType": null
